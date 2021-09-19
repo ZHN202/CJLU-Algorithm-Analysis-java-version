@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -7,7 +8,10 @@ public class Q2_5 {
     public static void main(String[] args) {
         int n = 10000;
         List<Integer> L = createList(n);
-
+        Iterator<Integer> iter = L.listIterator();
+        while(iter.hasNext()) {
+            System.out.println(iter.next());
+        }
     }
     static List createList(int n){
         Random r = new Random(n);
