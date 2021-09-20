@@ -1,23 +1,23 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class Q2_5 {
     public static void main(String[] args) {
         int n = 10000;
-        List<Integer> L = createList(n);
-        Iterator<Integer> iter = L.listIterator();
+        List L = createList(n,"arrayList");
+        ListIterator iter = L.listIterator();
         while(iter.hasNext()) {
             System.out.println(iter.next());
         }
     }
-    static List createList(int n){
+    static List createList(int n,String listType){
         Random r = new Random(n);
-        List<Integer> L = new ArrayList<Integer>();
-        for(int i=0;i<n;i++)
+        List<Integer> L = null;
+        if(listType.equals("arrayList"))L = new ArrayList<Integer>();
+        else if(listType.equals("linkedList"))L = new LinkedList<Integer>();
+        for(int i=0;i<n;i++) {
             L.add(r.nextInt(Integer.MAX_VALUE));
+        }
         return L;
     }
 }
