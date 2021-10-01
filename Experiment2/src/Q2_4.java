@@ -15,37 +15,39 @@ public class Q2_4 {
         endTime = System.currentTimeMillis(); //获取结束时间
         System.out.println("LinkedList程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
     }
-    static void method_A(int n){
+
+    static void method_A(int n) {
         List<Integer> L = new ArrayList<Integer>();
         Random r = new Random();
-        for(int i=0;i<n;i++)
+        for (int i = 0; i < n; i++)
             L.add(r.nextInt(Integer.MAX_VALUE));
-        int maxnum = Integer.MIN_VALUE,minnum = Integer.MIN_VALUE;
+        int maxnum = Integer.MIN_VALUE, minnum = Integer.MIN_VALUE;
         long sum = 0;
-        for(int i=0;i<n;i++){
+        for (int i = 0; i < n; i++) {
             int num = L.get(i);
-            if(num>maxnum)maxnum = num;
-            if(num<minnum)minnum = num;
-            sum+=num;
+            if (num > maxnum) maxnum = num;
+            if (num < minnum) minnum = num;
+            sum += num;
         }
         double average = sum / n;
-        System.out.println("max:"+maxnum+"  min:"+minnum+"  average:"+average);
+        System.out.println("max:" + maxnum + "  min:" + minnum + "  average:" + average);
     }
-    static void method_L(int n){
+
+    static void method_L(int n) {
         List<Integer> L = new LinkedList<Integer>();
         Random r = new Random();
-        for(int i=0;i<n;i++)
+        for (int i = 0; i < n; i++)
             L.add(r.nextInt(Integer.MAX_VALUE));
-        int maxnum = Integer.MIN_VALUE,minnum = Integer.MIN_VALUE;
+        int maxnum = Integer.MIN_VALUE, minnum = Integer.MIN_VALUE;
         long sum = 0;
-        for(int i=0;i<n;i++){
+        for (int i = 0; i < n; i++) {
             int num = L.get(i);
-            if(num>maxnum)maxnum = num;
-            if(num<minnum)minnum = num;
-            sum+=num;
+            if (num > maxnum) maxnum = num;
+            if (num < minnum) minnum = num;
+            sum += num;
         }
         double average = sum / n;
-        System.out.println("max:"+maxnum+"  min:"+minnum+"  average:"+average);
+        System.out.println("max:" + maxnum + "  min:" + minnum + "  average:" + average);
     }
 
 }

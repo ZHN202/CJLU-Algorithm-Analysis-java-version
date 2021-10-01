@@ -1,37 +1,67 @@
 public class Q2_9new {
     public static void main(String[] args) {
         NewPolynomial p1 = new NewPolynomial();
-        p1.append(10,1000);
-        p1.append(5,14);
-        p1.append(1,0);
+        //p1.append(10, 1000);
+        //p1.append(5, 14);
+        p1.append(0, 0);
         NewPolynomial p2 = new NewPolynomial();
-        p2.append(3,1990);
-        p2.append(-2,1492);
-        p2.append(11,1);
-        p2.append(5,0);
+        p2.append(3, 1990);
+        p2.append(-2, 1492);
+        p2.append(11, 1);
+        p2.append(5, 0);
         NewPolynomial p3 = new NewPolynomial();
-        p3.append(10,1000);
-        p3.append(5,14);
-        p3.append(1,0);
+        //p3.append(10, 1000);
+        //p3.append(5, 14);
+        p3.append(0, 0);
         p1.printPolynomial();
         p2.printPolynomial();
+
+        // 测试程序运行时间
+        long startTime = System.currentTimeMillis(); //获取开始时间
         p1.add(p2);
+        long endTime = System.currentTimeMillis(); //获取结束时间
+        System.out.println("ArrayList程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
         p1.printPolynomial();
+
+        // 测试程序运行时间
+        startTime = System.currentTimeMillis(); //获取开始时间
         p3.multiply(p2);
+        endTime = System.currentTimeMillis(); //获取结束时间
+        System.out.println("LinkedList程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
         p3.printPolynomial();
     }
 }
 
 class Item {
-    int a;
-    int e;
+    private int a;
+    private int e;
     Item next;
 
     Item(int a, int e) {
         this.a = a;
+        if (a == 0) this.e = 0;
+        else this.e = e;
+
+    }
+
+    Item() {
+    }
+
+    public int getA() {
+        return this.a;
+    }
+
+    public int getE() {
+        return this.e;
+    }
+
+    public void setA(int a) {
+        this.a = a;
+    }
+
+    public void setE(int e) {
         this.e = e;
     }
-    Item(){}
 }
 
 class NewPolynomial {
@@ -53,16 +83,18 @@ class NewPolynomial {
         Item headP = p.head;
         while (headP.next != null) {
             headP = headP.next;
+            if (headP.getA() == 0) headP.setE(0);
             Item headThis = this.head;
-            int e = headP.e;
+            int e = headP.getE();
             while (headThis.next != null) {
                 headThis = headThis.next;
-                if (headThis.e == e) {
-                    headThis.a = headP.a + headThis.a;
+                if (headThis.getE() == e) {
+                    headThis.setA(headP.getA() + headThis.getA());
                     break;
                 }
             }
-            if(headThis.next==null)this.append(headP.a,headP.e);
+            if (headThis.next == null) this.append(headP.getA(), headP.getE());
+
         }
     }
 
@@ -71,27 +103,35 @@ class NewPolynomial {
 
 
         NewPolynomial thisP = new NewPolynomial();
-        while(headP.next!=null){
+        while (headP.next != null) {
             headP = headP.next;
             Item headThis = head;
             NewPolynomial temp = new NewPolynomial();
-            while(headThis.next!=null){
+            while (headThis.next != null) {
                 headThis = headThis.next;
-                int a = headThis.a*headP.a;
-                int e = headThis.e+headP.e;
-                temp.append(a,e);
+                int a = headThis.getA() * headP.getA();
+                int e = headThis.getE() + headP.getE();
+                temp.append(a, e);
             }
             thisP.add(temp);
         }
         this.head.next = thisP.head.next;
     }
-    public void printPolynomial(){
+
+    public void printPolynomial() {
         Item headThis = head;
-        while(headThis.next!=null){
+        boolean flag = true;
+        while (headThis.next != null) {
             headThis = headThis.next;
-            if(headThis.e==0)System.out.print(headThis.a);
-            else System.out.print(headThis.a+"x^"+ headThis.e);
-            if(headThis.next!=null)System.out.print('+');
+            if (headThis.getA() == 0 && flag) {
+                System.out.print('0');
+                flag = false;
+            } else if (headThis.getA() != 0) {
+                if (headThis.getE() == 0) System.out.print(headThis.getA());
+                else System.out.print(headThis.getA() + "x^" + headThis.getE());
+            }
+            if (headThis.next != null && flag)
+                if (headThis.next.getA() >= 0) System.out.print('+');
         }
         System.out.println();
     }
