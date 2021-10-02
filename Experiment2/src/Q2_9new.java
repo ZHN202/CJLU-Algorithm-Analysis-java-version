@@ -1,34 +1,38 @@
+import java.util.Random;
+
 public class Q2_9new {
     public static void main(String[] args) {
+        int N = 10000;
+        Random r = new Random();
         NewPolynomial p1 = new NewPolynomial();
-        //p1.append(10, 1000);
-        //p1.append(5, 14);
-        p1.append(0, 0);
+        for(int i=0;i<N;i++){
+            p1.append(r.nextInt(Integer.MAX_VALUE), r.nextInt(Integer.MAX_VALUE));
+        }
+
         NewPolynomial p2 = new NewPolynomial();
-        p2.append(3, 1990);
-        p2.append(-2, 1492);
-        p2.append(11, 1);
-        p2.append(5, 0);
+        for(int i=0;i<N;i++){
+            p2.append(r.nextInt(Integer.MAX_VALUE), r.nextInt(Integer.MAX_VALUE));
+        }
         NewPolynomial p3 = new NewPolynomial();
-        //p3.append(10, 1000);
-        //p3.append(5, 14);
-        p3.append(0, 0);
-        p1.printPolynomial();
-        p2.printPolynomial();
+        for(int i=0;i<N;i++){
+            p3.append(r.nextInt(Integer.MAX_VALUE), r.nextInt(Integer.MAX_VALUE));
+        }
+        //p1.printPolynomial();
+        //p2.printPolynomial();
 
         // 测试程序运行时间
         long startTime = System.currentTimeMillis(); //获取开始时间
         p1.add(p2);
         long endTime = System.currentTimeMillis(); //获取结束时间
         System.out.println("ArrayList程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
-        p1.printPolynomial();
+        //p1.printPolynomial();
 
         // 测试程序运行时间
         startTime = System.currentTimeMillis(); //获取开始时间
         p3.multiply(p2);
         endTime = System.currentTimeMillis(); //获取结束时间
         System.out.println("LinkedList程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
-        p3.printPolynomial();
+        //p3.printPolynomial();
     }
 }
 

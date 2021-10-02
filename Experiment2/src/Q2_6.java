@@ -1,25 +1,20 @@
 public class Q2_6 {
     public static void main(String[] args) {
-        Node head = new Node();
-        Node node1 = new Node(1);
-        head.next(node1);
-        Node node2 = new Node(2);
-        node1.next(node2);
-        Node node3 = new Node(3);
-        node2.next(node3);
-        Node node4 = new Node(4);
-        node3.next(node4);
-        Node tail = new Node();
-        node4.next(tail);
-        Node head1 = head;
-        Node head2 = new Node();
+        int N = 10000000;
+        Node[] node = new Node[N];
+        Node Head = new Node();
+        node[0] = new Node(0);
+        Head.next(node[0]);
+
+        for(int i=0;i<N-1;i++){
+            node[i+1] = new Node(i+1);
+            node[i].next(node[i+1]);
+        }
+
         long startTime = System.currentTimeMillis(); //获取开始时间
 
-        while (head1.hasNext()) {
-            head1 = new Node(head1.getNext());
-            System.out.println(head1.getData());
-        }
-        head = reverseList(head);
+        Node head;
+        head = reverseList(Head);
         System.out.println("newList:");
         while (head.hasNext()) {
             head = head.getNext();
