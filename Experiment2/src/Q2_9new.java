@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 public class Q2_9new {
@@ -24,14 +26,14 @@ public class Q2_9new {
         long startTime = System.currentTimeMillis(); //获取开始时间
         p1.add(p2);
         long endTime = System.currentTimeMillis(); //获取结束时间
-        System.out.println("ArrayList程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
+        System.out.println("加法程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
         //p1.printPolynomial();
 
         // 测试程序运行时间
         startTime = System.currentTimeMillis(); //获取开始时间
         p3.multiply(p2);
         endTime = System.currentTimeMillis(); //获取结束时间
-        System.out.println("LinkedList程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
+        System.out.println("乘法程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
         //p3.printPolynomial();
     }
 }
@@ -82,45 +84,96 @@ class NewPolynomial {
         next = i;
     }
 
-    public void add(NewPolynomial p) {
+    // old way to add
+//    public void add(NewPolynomial p) {
+//
+//        Item headP = p.head;
+//        while (headP.next != null) {
+//            headP = headP.next;
+//            if (headP.getA() == 0) headP.setE(0);
+//            Item headThis = this.head;
+//            int e = headP.getE();
+//            while (headThis.next != null) {
+//                headThis = headThis.next;
+//                if (headThis.getE() == e) {
+//                    headThis.setA(headP.getA() + headThis.getA());
+//                    break;
+//                }
+//            }
+//            if (headThis.next == null) this.append(headP.getA(), headP.getE());
+//
+//        }
+//    }
 
+    // new way to add
+    public void add(NewPolynomial p){
         Item headP = p.head;
-        while (headP.next != null) {
+        HashMap<Integer, Integer> hashMap = new LinkedHashMap<Integer,Integer>();
+        while(headP.next!=null){
             headP = headP.next;
-            if (headP.getA() == 0) headP.setE(0);
-            Item headThis = this.head;
-            int e = headP.getE();
-            while (headThis.next != null) {
-                headThis = headThis.next;
-                if (headThis.getE() == e) {
-                    headThis.setA(headP.getA() + headThis.getA());
-                    break;
-                }
+            hashMap.put(headP.getE(), headP.getA());
+        }
+        Item headThis = head;
+        while(headThis.next!=null){
+            headThis = headThis.next;
+            int e = headThis.getE();
+            int a = headThis.getA();
+            if(hashMap.containsKey(e)) {
+                headThis.setA(hashMap.get(e) + a);
+                hashMap.remove(e);
             }
-            if (headThis.next == null) this.append(headP.getA(), headP.getE());
 
         }
+        hashMap.forEach((k,v)->this.append(v,k));
     }
+
+
+//    public void multiply(NewPolynomial p) {
+//        Item headP = p.head;
+//
+//
+//        NewPolynomial thisP = new NewPolynomial();
+//        while (headP.next != null) {
+//            headP = headP.next;
+//            Item headThis = head;
+//            NewPolynomial temp = new NewPolynomial();
+//            while (headThis.next != null) {
+//                headThis = headThis.next;
+//                int a = headThis.getA() * headP.getA();
+//                int e = headThis.getE() + headP.getE();
+//                temp.append(a, e);
+//            }
+//            thisP.add(temp);
+//        }
+//        this.head.next = thisP.head.next;
+//    }
+
 
     public void multiply(NewPolynomial p) {
         Item headP = p.head;
-
-
-        NewPolynomial thisP = new NewPolynomial();
+        HashMap<Integer, Integer> hashMap1 = new LinkedHashMap<Integer,Integer>();
+        HashMap<Integer, Integer> hashMap2 = new LinkedHashMap<Integer,Integer>();
+        Item headThis = head;
+        while(headThis.next!=null){
+            headThis = headThis.next;
+            hashMap1.put(headThis.getE(), headThis.getA());
+        }
         while (headP.next != null) {
             headP = headP.next;
-            Item headThis = head;
-            NewPolynomial temp = new NewPolynomial();
-            while (headThis.next != null) {
-                headThis = headThis.next;
-                int a = headThis.getA() * headP.getA();
-                int e = headThis.getE() + headP.getE();
-                temp.append(a, e);
-            }
-            thisP.add(temp);
+            int a = headP.getA();
+            int e = headP.getE();
+            hashMap1.forEach((k,v)->{
+                if(hashMap2.containsKey(e+k))
+                    hashMap2.replace(e+k,hashMap2.get(e+k) ,hashMap2.get(e+k)+a);
+                else
+                    hashMap2.put(e+k,a*v);
+            });
         }
+        NewPolynomial thisP = new NewPolynomial();
+        hashMap2.forEach((k,v)->thisP.append(v,k));
         this.head.next = thisP.head.next;
     }
+
 
     public void printPolynomial() {
         Item headThis = head;
