@@ -15,7 +15,7 @@ public class Q3_1 {
 
 
 class MylinkedListStack<AnyType>{
-    class Node<AnyType>{
+    private class Node<AnyType>{
         public AnyType data;
         public Node<AnyType> next;
 
