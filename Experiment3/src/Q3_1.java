@@ -51,8 +51,13 @@ class MylinkedListStack<AnyType>{
             return data;
         }
     }
-
+    public boolean empty(){if(size==0)return true;return false;}
     public int getSize() {
         return size;
+    }
+
+    public AnyType getTop() {
+        if(size==0)return null;
+        return (AnyType) top.next.data;
     }
 }
