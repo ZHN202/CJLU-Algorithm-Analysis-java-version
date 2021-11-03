@@ -62,9 +62,27 @@ class MyLinkedListQueue<AnyType>{
         size--;
         return data;
     }
-
+    public AnyType getTail(){
+        return (AnyType) tail.next.data;
+    }
+    public void setTail(AnyType data){
+        tail.next.data=data;
+    }
+    public void print(){
+        Node next=new Node();
+        next=head.next;
+        while(next!=tail.next){
+            System.out.print(next.data+"->");
+            next = next.next;
+        }
+        System.out.println(next.data);
+    }
     public int getSize() {
         return size;
+    }
+    public boolean empty(){
+        if(size==0)return true;
+        return false;
     }
 }
 

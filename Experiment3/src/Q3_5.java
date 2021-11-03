@@ -1,9 +1,12 @@
 import static java.lang.Math.pow;
 
-public class Q3_4 {
+public class Q3_5 {
     public static void main(String[] args) {
         String s = "((9+852+9.389)*8+5)/2-10/2+89*(5-2)";
+        System.out.println("infix expression:"+s);
+        System.out.println("postfix notaion:");
         dataProcess(s).print();
+        System.out.println("result:");
         System.out.println(cal(dataProcess(s)));
 
 
