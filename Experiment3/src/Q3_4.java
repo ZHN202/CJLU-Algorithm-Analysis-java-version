@@ -2,9 +2,17 @@ import static java.lang.Math.pow;
 
 public class Q3_4 {
     public static void main(String[] args) {
-        String s = "((9+852+9.389)*8+5)/2-10/2+89*(5-2)";
+        long startTime = System.currentTimeMillis(); //获取开始时间
+
+
+        String s = "(((3-4*5)*5-856.5)-8.23518+92*55.6-8/(846+364/4))*8-6*(54.3-6.58)-29+498/8.35";
         dataProcess(s).print();
         System.out.println(cal(dataProcess(s)));
+
+
+        long endTime = System.currentTimeMillis(); //获取结束时间
+        System.out.println("程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
+
 
 
     }
@@ -59,13 +67,15 @@ public class Q3_4 {
             } else if (c[i] == '*' || c[i] == '/') {
                 if (myStack.empty() || myStack.getTop().equals("+") || myStack.getTop().equals("-") || myStack.getTop().equals("(")) {
                     myStack.push(String.valueOf(c[i]));
-                } else if (myStack.getTop().equals("*") || myStack.getTop().equals("/")) {
-                    while (!myStack.getTop().equals("(") || !myStack.empty()) {
-                        result.enqueue(myStack.pop());
-                    }
-                    myStack.push(String.valueOf(c[i]));
-                }
+                } else if(!myStack.empty()) {
+                    if (myStack.getTop().equals("*") || myStack.getTop().equals("/")) {
+                        while (!myStack.empty() || !myStack.getTop().equals("(")) {
 
+                            result.enqueue(myStack.pop());
+                        }
+                        myStack.push(String.valueOf(c[i]));
+                    }
+                }
             } else if (c[i] >= 48 && c[i] <= 57) {
                 number.push((double) c[i] - 48);
                 boolean b = (i + 1) == s.length() || c[i + 1] < 48 || c[i + 1] > 57;

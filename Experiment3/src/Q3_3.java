@@ -3,9 +3,19 @@ import java.util.Stack;
 
 public class Q3_3 {
     public static void main(String[] args) {
-        String s=new String("*char[] c=s.toCharArray()*/;\n");
+        String s="/*char[22']' c=s.toCharArray()*/;\n";
+
+        long startTime = System.currentTimeMillis(); //获取开始时间
         StackCheck(s);
+        long endTime = System.currentTimeMillis(); //获取结束时间
+        System.out.println("API程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
+
+        startTime = System.currentTimeMillis(); //获取开始时间
         myStackCheck(s);
+        endTime = System.currentTimeMillis(); //获取结束时间
+        System.out.println("myStack程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
+
+
     }
     static void myStackCheck(String s){
         MylinkedListStack<Character> myStack = new MylinkedListStack<>();
