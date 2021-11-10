@@ -4,7 +4,6 @@ import java.util.Stack;
 public class Q3_3 {
     public static void main(String[] args) {
         String s="/*char[22']' c=s.toCharArray()*/;\n";
-
         long startTime = System.currentTimeMillis(); //获取开始时间
         StackCheck(s);
         long endTime = System.currentTimeMillis(); //获取结束时间
