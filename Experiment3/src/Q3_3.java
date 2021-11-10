@@ -3,7 +3,7 @@ import java.util.Stack;
 
 public class Q3_3 {
     public static void main(String[] args) {
-        String s=new String("*char[] c=s.toCharArray()*/;\n");
+        String s="*char[] c=s.toCharArray()*/;\n";
         StackCheck(s);
         myStackCheck(s);
     }
