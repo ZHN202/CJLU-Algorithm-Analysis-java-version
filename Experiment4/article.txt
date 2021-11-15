@@ -1,0 +1,39 @@
+﻿Experiment 4. Binary Trees
+1. Insert 3,1,4,6,9,7,5,2 into an initially empty binary search tree,
+a) Show the process of the insertions (You can use Microsoft Word, Visio, WPS or other
+software firstly, and finally you must convert it to a pdf file )
+b) Use the class of BinarySearchTree in the textbook,
+i.
+Write a method to calculate the number of leaves.
+ii.
+Write methods of preorder, inorder and postorder traversal.
+iii.
+Write a method to calculate the height of a binary search tree.
+iv.
+Write a method to calculate the number of nodes.
+c) In the main function,
+i.
+construct a binary search tree
+ii.
+call the above methods and print results of these callings.
+2. Insert 3, 1,4,6,9,7,5,2 into an initially empty AVL tree.
+a) Show the process of the insertions (You can use Microsoft Word, Visio, WPS or other
+softwares firstly, and finally you must convert it to a pdf file )
+b) Design a class of AVL tree by using the class of avlNode in the textbook,
+i.
+Write a program to calculate the number of leaves.
+ii.
+Write methods of preorder, inorder and postorder traversal.
+iii.
+Write a method to calculate the height of a binary search tree.
+iv.
+Write a method to calculate the number of nodes.
+c) In the main function,
+i.
+construct a AVL tree
+ii.
+call the above methods and print results of these callings.
+3. Count each word in a English file.
+a) Create a file and copy an English article to the file.
+b) Write a program to count each word in the file
+c) TreeMap must be used.
