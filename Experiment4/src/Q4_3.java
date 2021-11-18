@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 public class Q4_3 {
     public static void main(String[] args) {
-        String filename = "/home/robert/桌面/Algorithm-Analysis-java-version/Experiment4/article.txt";
-
+        String filename = "/home/robert/Algorithm-Analysis-java-version/Experiment4/article.txt";
+        int total=0;
         Map<String,Integer> map = new TreeMap<>();
         try (Scanner sc = new Scanner(new FileReader(filename))) {
             sc.useDelimiter(" ");  //分隔符
@@ -17,6 +17,7 @@ public class Q4_3 {
             while (sc.hasNext()) {   //按分隔符读取字符串
                 String str = sc.next();
                 str = str.toLowerCase();
+
                 System.out.println(str);
                 str = str.replaceAll("[^a-z]", "");
                 if(map.containsKey(str)){

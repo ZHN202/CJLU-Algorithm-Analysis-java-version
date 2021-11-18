@@ -102,29 +102,31 @@ class ADTtree<AnyType extends Comparable<? super AnyType>> {
     }
 
     private void preorder(treeNode<AnyType> root) {
-        if (root == null) System.out.println();
-        else {
-            inorder(root.left);
+        if (root != null){
             System.out.print(root.data + "->");
+            preorder(root.left);
 
-            inorder(root.right);
+
+            preorder(root.right);
         }
     }
 
     private void inorder(treeNode<AnyType> root) {
         if (root != null) {
-            System.out.print(root.data + "->");
+
             inorder(root.left);
+            System.out.print(root.data + "->");
             inorder(root.right);
         }
     }
 
     private void postorder(treeNode<AnyType> root) {
         if (root != null) {
-            inorder(root.right);
-            System.out.print(root.data + "->");
-            inorder(root.left);
+            postorder(root.left);
+            postorder(root.right);
 
+
+            System.out.print(root.data + "->");
         }
     }
 }

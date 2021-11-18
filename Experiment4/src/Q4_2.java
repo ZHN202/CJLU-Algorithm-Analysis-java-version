@@ -1,6 +1,6 @@
 public class Q4_2 {
     public static void main(String[] args) {
-        AVLtree<Integer> aTree = new AVLtree<>();
+        AVLTree<Integer> aTree = new AVLTree<>();
         aTree.insert(3);
         aTree.insert(1);
         aTree.insert(4);
@@ -22,7 +22,8 @@ public class Q4_2 {
 
 }
 
-class AVLtree<AnyType extends Comparable<? super AnyType>> {
+
+class AVLTree<AnyType extends Comparable<? super AnyType>> {
 
     private static final int ALLOWED_IMBALANCE = 1;
     private int nodeNumber;
@@ -48,7 +49,7 @@ class AVLtree<AnyType extends Comparable<? super AnyType>> {
 
     AvlNode<AnyType> root;
 
-    public AVLtree() {
+    public AVLTree() {
         root = null;
         nodeNumber=0;
     }
@@ -80,7 +81,9 @@ class AVLtree<AnyType extends Comparable<? super AnyType>> {
     public void postorderTraversal() {
         if (nodeNumber == 0) System.out.println("Tree is empty!!!");
         else postorder(root);
-        System.out.println();
+        System.out.println(
+
+        );
     }
     public int getHeight(){
         return treeHeight(root);
@@ -144,28 +147,27 @@ class AVLtree<AnyType extends Comparable<? super AnyType>> {
         return (leavesNumber(root.left) + leavesNumber(root.right));
     }
     private void preorder(AvlNode<AnyType> root) {
-        if (root == null) System.out.println();
-        else {
-            inorder(root.left);
+        if (root != null){
             System.out.print(root.data + "->");
-
-            inorder(root.right);
+            preorder(root.left);
+            preorder(root.right);
         }
     }
 
     private void inorder(AvlNode<AnyType> root) {
         if (root != null) {
-            System.out.print(root.data + "->");
             inorder(root.left);
+            System.out.print(root.data + "->");
             inorder(root.right);
         }
     }
 
     private void postorder(AvlNode<AnyType> root) {
         if (root != null) {
-            inorder(root.right);
+            postorder(root.left);
+            postorder(root.right);
             System.out.print(root.data + "->");
-            inorder(root.left);
+
 
         }
     }
