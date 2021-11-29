@@ -1,6 +1,6 @@
-public class Q4_1 {
+public class Q4_5 {
     public static void main(String[] args) {
-        ADTtree<Integer> aTree = new ADTtree<>();
+        ADTtree3<Integer> aTree = new ADTtree3<>();
         aTree.insert(3);
         aTree.insert(1);
         aTree.insert(4);
@@ -9,19 +9,16 @@ public class Q4_1 {
         aTree.insert(7);
         aTree.insert(5);
         aTree.insert(2);
-        System.out.println("leaves number:" + aTree.leavesNumber());
-        System.out.println("node number:" + aTree.getNodeNumber());
-        System.out.println("tree height:" + aTree.getHeight());
-        System.out.println("中序遍历：");
-        aTree.inorderTraversal();
-        System.out.println("后序遍历：");
-        aTree.postorderTraversal();
-        System.out.println("先序遍历：");
-        aTree.preorderTraversal();
+        System.out.print("the path to 9:");
+        aTree.thePathTo(9);
+        System.out.print("the path to 6:");
+        aTree.thePathTo(6);
+        System.out.print("the path to 2:");
+        aTree.thePathTo(2);
     }
 }
 
-class ADTtree<AnyType extends Comparable<? super AnyType>> {
+class ADTtree3<AnyType extends Comparable<? super AnyType>> {
     private static class treeNode<AnyType extends Comparable<? super AnyType>> {
         AnyType data;
         public treeNode<AnyType> left;
@@ -38,13 +35,20 @@ class ADTtree<AnyType extends Comparable<? super AnyType>> {
     private treeNode<AnyType> root;
     private int nodeNumber = 0;
 
-    public ADTtree() {
+    public ADTtree3() {
         root = null;
     }
 
     public void insert(AnyType data) {
         root = insert(data, root);
         nodeNumber++;
+    }
+
+    public void thePathTo(AnyType data) {
+        if (root == null)
+            System.out.println("tree is empty!!!");
+        else
+            Path(data, root);
     }
 
     public int leavesNumber() {
@@ -102,18 +106,15 @@ class ADTtree<AnyType extends Comparable<? super AnyType>> {
     }
 
     private void preorder(treeNode<AnyType> root) {
-        if (root != null){
+        if (root != null) {
             System.out.print(root.data + "->");
             preorder(root.left);
-
-
             preorder(root.right);
         }
     }
 
     private void inorder(treeNode<AnyType> root) {
         if (root != null) {
-
             inorder(root.left);
             System.out.print(root.data + "->");
             inorder(root.right);
@@ -124,9 +125,26 @@ class ADTtree<AnyType extends Comparable<? super AnyType>> {
         if (root != null) {
             postorder(root.left);
             postorder(root.right);
-
-
             System.out.print(root.data + "->");
         }
+    }
+
+    private void Path(AnyType data, treeNode<AnyType> root) {
+        while (true) {
+            int compareResult = data.compareTo(root.data);
+            if (compareResult < 0) {
+                System.out.print(root.data + "->");
+                root = root.left;
+            } else if (compareResult > 0) {
+                System.out.print(root.data + "->");
+                root = root.right;
+            }
+            else{
+                System.out.print(data+"\n");
+                break;
+            }
+
+        }
+
     }
 }

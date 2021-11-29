@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Q4_3 {
+public class Q4_3_en {
     public static void main(String[] args) {
         String filename = "/home/robert/Algorithm-Analysis-java-version/Experiment4/article.txt";
         int total=0;
