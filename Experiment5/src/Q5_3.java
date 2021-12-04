@@ -1,18 +1,29 @@
 import java.util.Arrays;
 
+import static java.lang.Math.floor;
+import static java.lang.Math.sqrt;
+
 public class Q5_3 {
     public static void main(String[] args) {
-        HashTable hashTable = new HashTable(33);
+        HashTable hashTable = new HashTable(40);
         for (int i = 1; i <= 20; i++)
             hashTable.insert(i);
-        System.out.print("find 3:");
-        System.out.print(hashTable.find(3) + "\n");
-        System.out.print("find 15:");
-        System.out.print(hashTable.find(15) + "\n");
-        System.out.print("find 13:");
-        System.out.print(hashTable.find(13) + "\n");
+
+
+        long startTime = System.currentTimeMillis(); //获取开始时间
+
+//        System.out.print("find 3:");
+//        System.out.print(hashTable.find(3) + "\n");
+//        System.out.print("find 15:");
+//        System.out.print(hashTable.find(15) + "\n");
+//        System.out.print("find 13:");
+//        System.out.print(hashTable.find(13) + "\n");
         System.out.print("find 100:");
         System.out.print(hashTable.find(100) + "\n");
+
+        long endTime = System.currentTimeMillis(); //获取结束时间
+        System.out.println("程序运行时间：" + (endTime - startTime) + "ms"); //输出程序运行时间
+
     }
 
 
@@ -39,16 +50,6 @@ class HashTable {
             rehash();
     }
 
-    public void remove(int data) {
-        int currentPos = findPos(data);
-        if (isActive(currentPos))
-            array[currentPos].isActive = false;
-    }
-
-    public boolean contains(int data) {
-        int currentPos = findPos(data);
-        return isActive(currentPos);
-    }
 
     public int find(int data) {
         return isActive(findPos(data)) ? findPos(data) : -1;
@@ -63,11 +64,6 @@ class HashTable {
     private static class HashEntry {
         public int data;
         public boolean isActive;
-
-        public HashEntry(int data) {
-            this.data = data;
-            this.isActive = false;
-        }
 
         public HashEntry(int data, boolean isActive) {
             this.data = data;
@@ -108,9 +104,9 @@ class HashTable {
         HashEntry[] oldArray = array;
         allocateArray(nextPrime(2 * oldArray.length));
         currentSize = 0;
-        for (int i = 0; i < oldArray.length; i++)
-            if (oldArray[i] != null && oldArray[i].isActive)
-                insert(oldArray[i].data);
+        for (HashEntry hashEntry : oldArray)
+            if (hashEntry != null && hashEntry.isActive)
+                insert(hashEntry.data);
     }
 
     private int hash(int data) {
@@ -126,12 +122,21 @@ class HashTable {
     }
 
     private static int nextPrime(int n) {
-        if (isPrime(n)) return n;
-        else return (n + 1);
+        while(true){
+            if(isPrime(n))return n;
+            else n++;
+        }
     }
 
     private static boolean isPrime(int n) {
-        return n % 2 == 1;
+        boolean flag=true;
+        for(int i=2;i<sqrt(n);i++) {
+            if (n % i == 0) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
     }
 }
 

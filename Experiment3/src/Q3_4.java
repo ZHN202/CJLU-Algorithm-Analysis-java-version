@@ -5,7 +5,7 @@ public class Q3_4 {
         long startTime = System.currentTimeMillis(); //获取开始时间
 
 
-        String s = "(((3-4*5)*5-856.5)-8.23518+92*55.6-8/(846+364/4))*8-6*(54.3-6.58)-29+498/8.35";
+        String s = "(1+2+3+4+5+6+7)/7";
         dataProcess(s).print();
         System.out.println(cal(dataProcess(s)));
 
