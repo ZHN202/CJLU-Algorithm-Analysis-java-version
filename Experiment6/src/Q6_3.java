@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Q6_3 {
     public static void main(String[] args) {
-        int N[] = {100, 1000, 5000, 10000, 50000, 100000};
+        int[] N = {100, 1000, 5000, 10000, 50000, 100000};
         Random r = new Random();
 
         int[][] t = new int[8][6];
